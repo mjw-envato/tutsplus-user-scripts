@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         TubeBuddy Rankings to CSV
 // @namespace    https://envato.com
-// @version      0.1
+// @version      0.2
+// @updateURL	 https://mjw-envato.github.io/tutsplus-user-scripts/tubebuddy_scraper_all.user.js
 // @description  Scrape search rankings from TubeBuddy
 // @author       @michaeljw
 // @match        https://www.tubebuddy.com/keywordranktracking/*
