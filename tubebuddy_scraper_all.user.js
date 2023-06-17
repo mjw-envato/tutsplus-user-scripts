@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         TubeBuddy Rankings to CSV
+// @name         TubeBuddy Rankings to TSV
 // @namespace    https://envato.com
 // @version      0.2
 // @updateURL	 https://mjw-envato.github.io/tutsplus-user-scripts/tubebuddy_scraper_all.user.js
 // @description  Scrape search rankings from TubeBuddy
-// @author       @michaeljw
+// @author       @michaeljw, @raguay
 // @match        https://www.tubebuddy.com/keywordranktracking/*
 // @require      https://code.jquery.com/jquery-3.7.0.slim.min.js
 // @grant GM_setValue
