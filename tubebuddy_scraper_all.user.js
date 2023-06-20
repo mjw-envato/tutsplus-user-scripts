@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         TubeBuddy Rankings to TSV
 // @namespace    https://envato.com
-// @version      0.2
+// @version      0.3
 // @updateURL	   https://mjw-envato.github.io/tutsplus-user-scripts/tubebuddy_scraper_all.user.js
 // @description  Scrape search rankings from TubeBuddy and perform needed functions.
 // @author       @michaeljw, @raguay
