@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         Envato CM Sentence Caser
-// @namespace    http://tampermonkey.net/
+// @namespace    https://envato.com/
+// @updateURL	 https://mjw-envato.github.io/tutsplus-user-scripts/envato-cm-sentence-caser.user.js
 // @version      2024-08-06
 // @description  Convert Envato content headers to sentence case
 // @author       You
