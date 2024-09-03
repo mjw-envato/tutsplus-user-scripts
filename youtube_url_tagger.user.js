@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Envato YouTube Link Tagger
 // @namespace    http://tampermonkey.net/
-// @version      0.1.23
+// @version      0.1.24
 // @description  Automatically add the correct UTM tags to links in Envato and Tuts+ YouTube video descriptions
 // @author       MichaelJW
 // @match        https://studio.youtube.com/*
@@ -35,7 +35,7 @@ function tryToSetUpUI() {
     }
     if (MJW.channel != "") {
         if ($("#MJW_description_url_params_button_MJW").length == 0 && document.location.href.search("/video/[^/]+/edit") > -1 && $("#description-container.description").length > 0) {
-            MJW.descButton = $("<input type='button' id='MJW_description_url_params_button_MJW' value='Set URL Parameters' title='URL parameters seem fine.'/>").insertBefore("#description-container.description");
+            MJW.descButton = $("<input type='button' id='MJW_description_url_params_button_MJW' value='Set URL Parameters' title='URL parameters seem fine.'/>").insertBefore("#description-container.description.ytcp-video-description");
             MJW.descButton.on("click", fixURLParametersDescription);
             $($("#description-container #textbox")[0]).on('focus', function() { MJW.descriptionOnFocus = $("#description-container #textbox")[0].textContent; });
             $($("#description-container #textbox")[0]).on('blur keyup paste', descriptionHasChanged);
