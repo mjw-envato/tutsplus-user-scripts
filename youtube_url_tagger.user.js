@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Envato YouTube Link Tagger
 // @namespace    http://tampermonkey.net/
-// @version      0.1.24
+// @version      0.1.25
 // @description  Automatically add the correct UTM tags to links in Envato and Tuts+ YouTube video descriptions
 // @author       MichaelJW
 // @match        https://studio.youtube.com/*
@@ -26,6 +26,8 @@ function tryToSetUpUI() {
             MJW.channel = "Tuts+";
         } else if (ytcfg.get("CHANNEL_ID") == "UCJr72fY4cTaNZv7WPbvjaSw") {
             MJW.channel = "Envato";
+        } else if (ytcfg.get("CHANNEL_ID") == "UCgT9frC3SAdk-sxEN1_8rZg") {
+            MJW.channel = "Envato Video";
         }
         if (document.location.href.match("/video/([^/]+)/") != null) {
             MJW.videoId = document.location.href.match("/video/([^/]+)/")[1];
@@ -131,6 +133,11 @@ function fixURLParameters(originalText) {
                 if (/tutsplus.com/i.test(domain)) utmCampaign = "utm_campaign=tutsplus_social_eyt_" + MJW.videoId;
                 utmMedium = "utm_medium=social";
                 utmSource = "utm_source=YouTube";
+                utmContent = "utm_content=description";
+            } else if (MJW.channel == "Envato Video") {
+                utmCampaign = "utm_campaign=yt_envatovideo_" + MJW.videoId;
+                utmMedium = "utm_medium=referral";
+                utmSource = "utm_source=youtube.com";
                 utmContent = "utm_content=description";
             }
         }
