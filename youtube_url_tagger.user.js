@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Envato YouTube Link Tagger
 // @namespace    http://tampermonkey.net/
-// @version      0.1.25
+// @version      0.1.26
 // @description  Automatically add the correct UTM tags to links in Envato and Tuts+ YouTube video descriptions
 // @author       MichaelJW
 // @match        https://studio.youtube.com/*
@@ -34,20 +34,29 @@ function tryToSetUpUI() {
         } else {
             MJW.videoID = "";
         }
+        MJW.videoIsYouTubeShort = false;
+        if ($("a.ytcp-video-info").attr("href").includes("/shorts/")) {
+            MJW.videoIsYouTubeShort = true;
+        }
     }
     if (MJW.channel != "") {
         if ($("#MJW_description_url_params_button_MJW").length == 0 && document.location.href.search("/video/[^/]+/edit") > -1 && $("#description-container.description").length > 0) {
-            MJW.descButton = $("<input type='button' id='MJW_description_url_params_button_MJW' value='Set URL Parameters' title='URL parameters seem fine.'/>").insertBefore("#description-container.description.ytcp-video-description");
-            MJW.descButton.on("click", fixURLParametersDescription);
-            $($("#description-container #textbox")[0]).on('focus', function() { MJW.descriptionOnFocus = $("#description-container #textbox")[0].textContent; });
-            $($("#description-container #textbox")[0]).on('blur keyup paste', descriptionHasChanged);
+            if (MJW.videoIsYouTubeShort) {
+                MJW.descButton = $("<input type='button' id='MJW_description_url_params_button_MJW' disabled='disabled' value='(No need to add URL parameters for Shorts)' title='YT Shorts don't need UTM parameters because links aren't clickable.'/>").insertBefore("#description-container.description.ytcp-video-description");
+            }
+            else {
+                MJW.descButton = $("<input type='button' id='MJW_description_url_params_button_MJW' value='Set URL Parameters' title='URL parameters seem fine.'/>").insertBefore("#description-container.description.ytcp-video-description");
+                MJW.descButton.on("click", fixURLParametersDescription);
+                $($("#description-container #textbox")[0]).on('focus', function() { MJW.descriptionOnFocus = $("#description-container #textbox")[0].textContent; });
+                $($("#description-container #textbox")[0]).on('blur keyup paste', descriptionHasChanged);
 
-            let fixedDescription = fixURLParameters($("#description-container #textbox")[0].textContent);
-            if ($("#description-container #textbox")[0].textContent != fixedDescription) {
-                MJW.descButton[0].value = "Set URL Parameters (*)";
-                MJW.descButton[0].title = "Description has changed since URL parameters were last checked.";
-            } else {
-                MJW.lastFixedDescription = fixedDescription;
+                let fixedDescription = fixURLParameters($("#description-container #textbox")[0].textContent);
+                if ($("#description-container #textbox")[0].textContent != fixedDescription) {
+                    MJW.descButton[0].value = "Set URL Parameters (*)";
+                    MJW.descButton[0].title = "Description has changed since URL parameters were last checked.";
+                } else {
+                    MJW.lastFixedDescription = fixedDescription;
+                }
             }
         }
 
@@ -146,7 +155,7 @@ function fixURLParameters(originalText) {
 
         let newURLParams = [couponCode, utmCampaign, utmMedium, utmSource, utmContent, otherParams].flat().filter(element => element != undefined).join("&").replace(/&$/, "");
 
-        // Starting June 16 we found that YouTube does not treat URL parameters as part of the link if they are tacked on to a bare (sub)domain without trailing space.
+        // Starting June 16 we found that YouTube does not treat URL parameters as part of the link if they are tacked on to a bare (sub)domain without trailing slash.
         // https://elements.envato.com?utm_[...] does not include the URL parameters, but
         // https://elements.envato.com/?utm_[...] does.
         // This does not seem to affect URLs that link to a page or folder.
