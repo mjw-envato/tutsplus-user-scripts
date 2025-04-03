@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Envato YouTube Link Tagger
 // @namespace    http://tampermonkey.net/
-// @version      0.1.27
+// @version      0.1.28
 // @description  Automatically add the correct UTM tags to links in Envato and Tuts+ YouTube video descriptions
 // @author       MichaelJW
 // @match        https://studio.youtube.com/*
 // @exclude      https://studio.youtube.com/*/analytics/*
 // @grant        none
-// @require      data:text/plain;base64,d2luZG93LnRydXN0ZWRUeXBlcy5jcmVhdGVQb2xpY3koJ2RlZmF1bHQnLCB7IGNyZWF0ZUhUTUw6IHN0ciA9PiBzdHIsIGNyZWF0ZVNjcmlwdFVSTDogc3RyPT4gc3RyLCBjcmVhdGVTY3JpcHQ6IHN0cj0+IHN0ciB9KTs=
+// @require      data:text/plain;base64,aWYgKCJ0cnVzdGVkVHlwZXMiIGluIHdpbmRvdykgeyB3aW5kb3cudHJ1c3RlZFR5cGVzLmNyZWF0ZVBvbGljeSgnZGVmYXVsdCcsIHsgY3JlYXRlSFRNTDogc3RyID0+IHN0ciwgY3JlYXRlU2NyaXB0VVJMOiBzdHI9PiBzdHIsIGNyZWF0ZVNjcmlwdDogc3RyPT4gc3RyIH0pOyB9
 // @require      https://code.jquery.com/jquery-3.6.0.slim.min.js
 // @run-at       document-start
 // @downloadURL  https://mjw-envato.github.io/tutsplus-user-scripts/youtube_url_tagger.user.js
